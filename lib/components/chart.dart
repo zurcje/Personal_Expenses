@@ -56,16 +56,18 @@ class Chart extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTransactions.map((tr) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                label: tr['day'],
-                value: tr['value'],
-                percentage: (tr['value'] as double) / _weekTotalValue,
-              ),
-            );
-          }).toList(),
+          children: groupedTransactions.map(
+            (tr) {
+              return Flexible(
+                fit: FlexFit.tight,
+                child: ChartBar(
+                  label: tr['day'],
+                  value: tr['value'],
+                  percentage: _weekTotalValue == 0 ? 0 : (tr['value'] as double) / _weekTotalValue,
+                ),
+              );
+            },
+          ).toList(),
         ),
       ),
     );
